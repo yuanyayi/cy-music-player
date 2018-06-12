@@ -1,0 +1,232 @@
+/* INDEX */
+* {
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+a:hover {
+  color: inherit;
+}
+html,body {
+  height: 100%;
+}
+body {
+  position: relative;
+  background: linear-gradient(#ace, #f96 80%, #f96 100%) no-repeat;
+}
+/*.cyPlayer */
+
+.cyPlayer {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 600px;
+  margin: auto;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .2);
+  background: linear-gradient(rgba(255, 255, 255, .2), rgba(255, 255, 255, .3) 75%, rgba(255, 255, 255, .5) 85%, rgba(255, 255, 255, .4));
+  box-shadow: 0 0 2px #eee inset, 1px 1px 5px #7e7e7e;
+}
+
+.cyPlayer * {
+  box-sizing: border-box;
+}
+
+
+/* 信息 */
+
+.cyPlayer .infoPanel {
+  color: #fff;
+  padding: 40px 40px 0;
+}
+
+.cyPlayer .infoPanel:after {
+  content: '.';
+  height: 0;
+  display: block;
+  visibility: hidden;
+  clear: both;
+}
+
+.cyPlayer .infoPanel .songImage {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  float: left;
+  margin-right: 20px;
+  border: 5px solid pink;
+  box-shadow: 1px 1px 3px #7e7e7e, -1px -1px 3px #fff;
+}
+
+.cyPlayer .infoPanel .songImage img {
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cyPlayer .infoPanel .song {
+  line-height: 30px;
+  font-family: PingFangSC-Semibold;
+  font-size: 1.8em;
+  text-shadow: 1px 0 0 #eee;
+}
+
+.cyPlayer .infoPanel .singer {
+  line-height: 20px;
+  font-family: PingFangSC-Regular;
+  font-size: 1.2em;
+  margin-top: 10px;
+}
+
+
+/* 进度条 */
+
+.cyPlayer .progressBox {
+  margin: 30px 0;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.cyPlayer .progressBox .progress {
+  position: relative;
+  flex: 1;
+  height: 10px;
+  background: rgba(255, 255, 255, .5);
+  border-radius: 10px;
+  box-shadow: -1px 1px 0 #bfbfbf inset, 1px -1px 0 #f1f1f1 inset;
+  cursor: pointer;
+}
+
+.cyPlayer .progressBox .progress .bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-radius: 10px;
+  background: orange;
+  box-shadow: -1px 1px 1px #f1f1f1 inset, 1px -1px 1px #bfbfbf inset;
+}
+
+.cyPlayer .progressBox .time {
+  color: #fff;
+  text-shadow: 1px 0 0 #eee;
+}
+
+.cyPlayer .progressBox .now {
+  margin-right: 10px;
+}
+
+.cyPlayer .progressBox .total {
+  margin-left: 10px;
+}
+
+
+/* 控制器 */
+
+.cyPlayer .controllerPanel {
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  padding: 0 40px 40px;
+}
+
+.cyPlayer .controllerPanel i.fa {
+  font-size: 24px;
+  margin: 10px;
+  text-shadow: 2px 2px 7px #bfbfbf;
+  color: #fff;
+  flex: 1;
+}
+
+.cyPlayer .controllerPanel i.fa:hover {
+  text-shadow: 2px 2px 7px #666;
+}
+
+.cyPlayer .controllerPanel i.fa:active {
+  text-shadow: none;
+}
+
+.cyPlayer .controllerPanel i.pause{
+  display: none;
+}
+
+/* 音量 */
+.cyPlayer .controllerPanel .volumeBox {
+  flex: 2;
+  display: flex;
+  align-items: center;
+}
+.cyPlayer .controllerPanel .volumeBox i::before {
+  display: block;
+  width: 22.3px;
+}
+.cyPlayer .controllerPanel .volumeBox i.mute,
+.cyPlayer .controllerPanel .volumeBox.mute i.sound {
+  display: none;
+}
+.cyPlayer .controllerPanel .volumeBox.mute i.mute {
+  display: block;
+}
+
+.cyPlayer .controllerPanel .volumeBox .volume {
+  position: relative;
+  display: block;
+  height: 5px;
+  width: 100%;
+  background: rgba(255, 255, 255, .5);
+  border-radius: 5px;
+  box-shadow: -1px 1px 0 #bfbfbf inset, 1px -1px 0 #f1f1f1 inset;
+  cursor: pointer;
+}
+
+.cyPlayer .controllerPanel .volumeBox .bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  border-radius: 10px;
+  background: orange;
+  box-shadow: -1px 1px 1px #f1f1f1 inset, 1px -1px 1px #bfbfbf inset;
+}
+
+
+/* 播放列表 */
+
+.cyPlayer .playListWrap {
+  background: rgba(255, 255, 255, .2);
+  position: absolute;
+  display: none;
+  width: 100%;
+  max-height: 21em;
+  overflow: scroll;
+}
+
+.cyPlayer .playList {
+  list-style: none;
+}
+
+.cyPlayer .playList li {
+  height: 3em;
+  line-height: 3em;
+  padding: 0 40px;
+}
+
+.cyPlayer .playList li .songName {
+  font-family: PingFangSC-Medium;
+  font-size: 1.2em;
+}
+
+.cyPlayer .playList li .singerName {
+  font-family: PingFangSC-Thin;
+}

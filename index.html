@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>cy-网页音乐播放器</title>
+  <link rel="stylesheet" type="text/css" href="static/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="static/css/cyPlayer.css">
+</head>
+
+<body>
+  <div id="myPlayer" class="cyPlayer">
+    <!-- 音乐信息 -->
+    <div class="infoPanel">
+      <!-- 专辑封面图 -->
+      <div class="songImage">
+        <img src="./asset/images/taylor-swift-look-what-you-made-me-do-screenshot-2017-billboard-1548.jpg" />
+      </div>
+      <p class="song">Look What You Made Me Do</p>
+      <p class="singer">Taylor Swift</p>
+    </div>
+    <!-- 播放器 -->
+    <div class="playerPanel">
+      <!-- 隐藏的audio -->
+      <audio autoplay="false" hidden>
+        <source src="./asset/songs/Taylor+Swift+-+Look+What+You+Made+Me+Do.mp3"> 当前浏览器不支持audio标签
+      </audio>
+      <!-- 进度条 -->
+      <div class="progressBox">
+        <span class="time now">1:41</span>
+        <span class="songPro progress">
+          <span class="bar"></span>
+        </span>
+        <span class="time total">3:04</span>
+      </div>
+      <!-- 控制器 -->
+      <div class="controllerPanel">
+        <i class="fa fa-bars menu"></i>
+        <i class="fa fa-step-backward prev"></i>
+        <i class="fa fa-play play"></i>
+        <i class="fa fa-pause pause"></i>
+        <i class="fa fa-step-forward next"></i>
+        <div class="volumeBox">
+          <i class="fa fa-volume-up sound"></i>
+          <i class="fa fa-volume-off mute"></i>
+          <span class="volume">
+                <span class="bar"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <!-- 播放列表 -->
+    <div class="playListWrap">
+      <ul class="playList">
+      </ul>
+    </div>
+  </div>
+</body>
+<script src="static/js/jquery-3.3.1.min.js"></script>
+<script src="static/js/cyPlayer.js"></script>
+<script>
+let myplayer = new cyPlayer(document.getElementById('myPlayer'))
+</script>
+
+</html>
