@@ -43,6 +43,7 @@ function cyPlayer(domEl) {
   this.songProgress = new ProgressBar(this.player.find('.progress'), (value) => {
     _this.currentTime(Math.floor(value * this.audio.duration))
   })
+  this.nowText = this.player.find('.time.now')
   // playList
   this.playListWrap = this.player.find('.playListWrap')
   this.playList = this.player.find('.playList')
@@ -78,9 +79,9 @@ function cyPlayer(domEl) {
     start: () => {
       this._playTimer.playingTimer = setInterval(() => {
         let d = this.audio.duration
-        console.log(this.audio.currentTime)
         // 改变进度条的长度
         this.songProgress.moveProgressBarByRate(Math.round(this.audio.currentTime / d * 100) / 100)
+        this.nowText.text(Math.round(this.audio.currentTime))
       }, 1000)
     },
     clear: () => {
@@ -110,6 +111,7 @@ function cyPlayer(domEl) {
     this.pauseBtn.hide()
     this.playBtn.show()
     this._playTimer.clear()
+    this.songProgress.moveProgressBarByLength(0)
   }
   // 上一下一
   this._prev = () => {
