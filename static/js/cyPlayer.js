@@ -33,8 +33,22 @@ function cyPlayer(domEl) {
     this.playListWrap.toggle()
   })
   // 声音和静音Btn
-  this.soundBtn = this.controller.children('i.sound')
-  this.muteBtn = this.controller.children('i.mute')
+  this.soundBtn = this.controller.find('i.sound')
+  this.muteBtn = this.controller.find('i.mute')
+  this.volumeBox = this.controller.children('.volumeBox')
+  this.soundBtn.on('click', ()=>{
+    this.volumeBox.addClass('mute')
+    this.savedVolume = this.volume()
+    this.volume(0)
+    // 少一个DOM操作
+    this.volumeProgress.moveProgressBarByRate(0)
+  })
+  this.muteBtn.on('click', ()=>{
+    this.volumeBox.removeClass('mute')
+    this.volume(this.savedVolume)
+    // 少一个DOM操作
+    this.volumeProgress.moveProgressBarByRate(this.savedVolume)
+  })
   // volumeProgress
   this.volumeProgress = new ProgressBar(this.controller.find('.volume'), (value) => {
     _this.volume(value)
