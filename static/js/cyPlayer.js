@@ -1,13 +1,13 @@
-let songsList = [{
-  songName: 'Wildest Dreams',
-  singerName: 'Taylor Swift',
-  src: 'Wildest Dreams.m4a',
-  img: 'taylor-swift-1989-album-cover-and-promo-pictures-2014-_2.jpg',
-}, {
+let songsList = [ {
   songName: 'You Are My Everything',
   singerName: 'Lexington Bridge',
   src: 'You Are My Everything.m4a',
   img: 'lexington-bridge-15.jpeg',
+},{
+  songName: 'Wildest Dreams',
+  singerName: 'Taylor Swift',
+  src: 'Wildest Dreams.m4a',
+  img: 'taylor-swift-1989-album-cover-and-promo-pictures-2014-_2.jpg',
 }, {
   songName: 'Clean',
   singerName: 'Taylor Swift',
@@ -49,24 +49,21 @@ function cyPlayer(domEl) {
   this.soundBtn = this.controller.find('i.sound')
   this.muteBtn = this.controller.find('i.mute')
   this.volumeBox = this.controller.children('.volumeBox')
-  // volumeProgress
-  this.volumeProgress = new ProgressBar(this.controller.find('.volume'), (value) => {
-    _this.volume(value)
-  })
   // songProgress
   this.songProgress = new ProgressBar($el.find('.progress'), (value) => {
-      _this.currentTime(Math.floor(value))
-    }, this.player.duration)
+    _this.currentTime(Math.floor(value))
+  }, this.player.duration)
   this.currentTimeText = $el.find('.time.current')
   this.durationTimeText = $el.find('.time.duration')
   // playList
   this.playListWrap = $el.find('.playListWrap')
   this.playList = $el.find('.playList')
   // playList Index
-  // this.songsIndexList = []
-  // for (let i = 0; i < this.songsList.length) {
-  //   this.songsIndexList.push(i)
-  // }
+  this.songsIndexList = []
+  for (let i = 0; i < this.songsList.length; i++) {
+    this.songsIndexList.push(i)
+  }
+  console.log(this.songsIndexList)
   // the song for now
   this.indexNow = 0
 
@@ -102,7 +99,16 @@ function cyPlayer(domEl) {
     }
     return this.player.volume
   }
-  this.volume(0.5)
+  // volumeProgress
+  this.volumeProgress = new ProgressBar(this.controller.find('.volume'), (value) => {
+    _this.volume(value)
+    if (window.localStorage) {
+      localStorage.cyVolume = _this.volume()
+    }
+  })
+  // volume init
+  let initVolume = window.localStorage && localStorage.cyVolume ? localStorage.cyVolume : 0.5
+  this.volumeProgress.setProgressValue(initVolume)
   // 媒体进度
   this.currentTime = (value) => {
     if (typeof value === 'number') {
@@ -125,7 +131,7 @@ function cyPlayer(domEl) {
       // 改变进度条
       function todo() {
         let d = _this.player.duration
-        _this.songProgress.setProgressValue(_this.player.currentTime + 1)
+        _this.songProgress._setProgressValue(_this.player.currentTime + 1)
         _this.currentTimeText.text(formatTime(_this.player.currentTime))
       }
       todo()
@@ -163,8 +169,8 @@ function cyPlayer(domEl) {
   this._stop = () => {
     this.player.pause();
     this.player.currentTime = 0;
-    this.songProgress.setProgressValue(0)
-, false  }
+    this.songProgress.setProgressValue(0), false
+  }
   // 上一下一
   this._prev = () => {
     this.indexNow = this.indexNow - 1 >= 0 ? this.indexNow - 1 : this.songsList.length - 1
@@ -176,10 +182,13 @@ function cyPlayer(domEl) {
     this._changeSong()
   }
   this.nextBtn.on('click', this._next)
+  this.player.onended = () => {
+    this._next()
+  }
   // 切换歌曲
   this._changeSong = (i) => {
     if (i || i === 0) { this.indexNow = i }
-    let song = this.songsList[this.indexNow]
+    let song = this.songsList[this.songsIndexList[this.indexNow]]
     if (!song) return false
     this._stop()
     // info
@@ -195,7 +204,7 @@ function cyPlayer(domEl) {
   })
   // ------------------- keyboard actions ------------------- //
   $('body').on('keyup', (e) => {
-    console.log(e.keyCode)
+    // console.log(e.keyCode)
     const VOLUMEDIFF = 0.05
     // space
     if (e.keyCode === 32) {
@@ -248,8 +257,8 @@ function cyPlayer(domEl) {
     this.max = max || 1
     this.value = Math.round(this.bar.width() / this.boxW * 100) / 100
     this.PIECE = this.boxW / (this.max - this.min)
-    this.changeMax = (num)=>{
-      if(typeof num !== 'number') return false
+    this.changeMax = (num) => {
+      if (typeof num !== 'number') return false
       this.max = num
       this.PIECE = this.boxW / (this.max - this.min)
     }
@@ -260,8 +269,8 @@ function cyPlayer(domEl) {
       // 动画
       if (!animate || animate === '') {
         this.bar.width(finalWidth + 2)
-      } else if( !!animate || animate == undefined) {
-        this.bar.stop(true,true)
+      } else if (!!animate || animate == undefined) {
+        this.bar.stop(true, true)
         this.bar.animate({ 'width': finalWidth + 2 }, 1000)
       }
       return true
@@ -279,15 +288,10 @@ function cyPlayer(domEl) {
     // 外部设置：
     this.setProgressValue = (value, animate) => {
       this._setProgressValue(value, animate)
+      this.onValueChange(this.value, this.oldValue)
     }
     // 点击行为
     this.onValueChange = onValueChange
-    this.box.on('click', e => {
-      let len = (e.clientX - this.box.offset().left)
-      let value = len / this.boxW * (this.max - this.min)
-      this._setProgressValue(value, false)
-      this.onValueChange(this.value, this.oldValue)
-    })
     this.box.on('mousedown', e => {
       $(document).on('mousemove', e => {
         let len = e.clientX - this.box.offset().left
@@ -299,12 +303,12 @@ function cyPlayer(domEl) {
         $(document).off('mouseup')
         let len = e.clientX - this.box.offset().left
         let value = len / this.boxW * (this.max - this.min)
-        this._setProgressValue(value, false)
-        this.onValueChange(this.value, this.oldValue)
+        this.setProgressValue(value, false)
       })
     })
     return this
   }
+
   function formatTime(seconds) {
     return Math.floor(seconds / 60) + ':' + ((seconds % 60) >= 10 ? '' : '0') + Math.floor(seconds % 60)
   }
