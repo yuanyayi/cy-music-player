@@ -63,7 +63,7 @@ function cyPlayer(domEl) {
   for (let i = 0; i < this.songsList.length; i++) {
     this.songsIndexList.push(i)
   }
-  console.log(this.songsIndexList)
+  // console.log(this.songsIndexList)
   // the song for now
   this.indexNow = 0
 
