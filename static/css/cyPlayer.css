@@ -1,28 +1,34 @@
 /* INDEX */
+
 * {
   margin: 0;
   padding: 0;
 }
+
 a {
   text-decoration: none;
   color: inherit;
 }
+
 a:hover {
   color: inherit;
 }
-html,body {
+
+html,
+body {
   height: 100%;
 }
+
 body {
   position: relative;
-  background: linear-gradient(#ace, #f96 80%, #f96 100%) no-repeat;
 }
-body:before{
+
+body:before {
   content: '';
   display: block;
   width: 100%;
   height: 100%;
-  background: url("../../asset/images/taylor-swift-look-what-you-made-me-do-screenshot-2017-billboard-1548.jpg") no-repeat center/cover;
+  background: linear-gradient(#ace, #f96 80%, #f96 100%) no-repeat;
   position: absolute;
   top: 0;
   left: 0;
@@ -30,15 +36,17 @@ body:before{
   left: 0;
   filter: blur(5px);
 }
+
 /*.cyPlayer */
 
 .cyPlayer {
   position: absolute;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   min-width: 600px;
   margin: auto;
-  margin-top: 30%;
+  /*margin-top: 50%;*/
   border-radius: 12px;
   background: rgba(255, 255, 255, .2);
   background: linear-gradient(rgba(255, 255, 255, .2), rgba(255, 255, 255, .3) 75%, rgba(255, 255, 255, .5) 85%, rgba(255, 255, 255, .4));
@@ -50,11 +58,15 @@ body:before{
 }
 
 
+
+
+
 /* 信息 */
 
 .cyPlayer .infoPanel {
   color: #fff;
   padding: 40px 40px 0;
+  margin-top: 80px;
 }
 
 .cyPlayer .infoPanel:after {
@@ -66,14 +78,18 @@ body:before{
 }
 
 .cyPlayer .infoPanel .songImage {
-  width: 100px;
-  height: 100px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   overflow: hidden;
-  position: relative;
-  float: left;
+  /*position: relative;*/
+  /*float: left;*/
   margin-right: 20px;
-  border: 5px solid pink;
+  border: 10px solid rgba(255, 255, 255, .6);
   box-shadow: 1px 1px 3px #7e7e7e, -1px -1px 3px #fff;
 }
 
@@ -112,12 +128,13 @@ body:before{
 
 .cyPlayer .progressBox .progress {
   position: relative;
-  flex: 1;
+  flex: 10;
   height: 10px;
   background: rgba(255, 255, 255, .5);
   border-radius: 10px;
   box-shadow: -1px 1px 0 #bfbfbf inset, 1px -1px 0 #f1f1f1 inset;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .cyPlayer .progressBox .progress .bar {
@@ -127,22 +144,22 @@ body:before{
   height: 100%;
   border-radius: 10px;
   background: orange;
-  box-shadow: -1px 1px 1px #f1f1f1 inset, 1px -1px 1px #bfbfbf inset;
+  background-image: repeating-linear-gradient(45deg, hsla(0, 0%, 100%, .5), hsla(0, 0%, 100%, .5) 7px, transparent 0, transparent 10px) !important;
 }
 
 .cyPlayer .progressBox .time {
   color: #fff;
   text-shadow: 1px 0 0 #eee;
+  flex: 1;
 }
 
-.cyPlayer .progressBox .now {
+.cyPlayer .progressBox .current {
   margin-right: 10px;
 }
 
-.cyPlayer .progressBox .total {
+.cyPlayer .progressBox .duration {
   margin-left: 10px;
 }
-
 
 /* 控制器 */
 
@@ -169,24 +186,29 @@ body:before{
   text-shadow: none;
 }
 
-.cyPlayer .controllerPanel i.pause{
+.cyPlayer .controllerPanel i.pause {
   display: none;
 }
 
+
 /* 音量 */
+
 .cyPlayer .controllerPanel .volumeBox {
   flex: 2;
   display: flex;
   align-items: center;
 }
+
 .cyPlayer .controllerPanel .volumeBox i::before {
   display: block;
   width: 22.3px;
 }
+
 .cyPlayer .controllerPanel .volumeBox i.mute,
 .cyPlayer .controllerPanel .volumeBox.mute i.sound {
   display: none;
 }
+
 .cyPlayer .controllerPanel .volumeBox.mute i.mute {
   display: block;
 }
@@ -200,6 +222,7 @@ body:before{
   border-radius: 5px;
   box-shadow: -1px 1px 0 #bfbfbf inset, 1px -1px 0 #f1f1f1 inset;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .cyPlayer .controllerPanel .volumeBox .bar {
@@ -209,10 +232,8 @@ body:before{
   width: 50%;
   height: 100%;
   border-radius: 10px;
-  background: orange;
-  box-shadow: -1px 1px 1px #f1f1f1 inset, 1px -1px 1px #bfbfbf inset;
+  background-color: rgba(255,255,255,.8);
 }
-
 
 /* 播放列表 */
 

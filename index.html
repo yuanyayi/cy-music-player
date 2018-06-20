@@ -15,24 +15,26 @@
     <div class="infoPanel">
       <!-- 专辑封面图 -->
       <div class="songImage">
-        <img src="./asset/images/taylor-swift-look-what-you-made-me-do-screenshot-2017-billboard-1548.jpg" />
+        <div class="imgBg"></div>
+        <img src=""/>
       </div>
-      <p class="song">Look What You Made Me Do</p>
-      <p class="singer">Taylor Swift</p>
+      <p class="song"></p>
+      <p class="singer"></p>
     </div>
     <!-- 播放器 -->
     <div class="playerPanel">
       <!-- 隐藏的audio -->
       <audio autoplay="false" hidden>
-        <source src="./asset/songs/Taylor+Swift+-+Look+What+You+Made+Me+Do.mp3"> 当前浏览器不支持audio标签
+        <source src=""> 
+        Oops！当前浏览器不支持audio标签～
       </audio>
       <!-- 进度条 -->
       <div class="progressBox">
-        <span class="time now">1:41</span>
+        <span class="time current">-:-</span>
         <span class="songPro progress">
           <span class="bar"></span>
         </span>
-        <span class="time total">3:04</span>
+        <span class="time duration">-:-</span>
       </div>
       <!-- 控制器 -->
       <div class="controllerPanel">
@@ -59,6 +61,7 @@
 </body>
 <script src="static/js/jquery-3.3.1.min.js"></script>
 <script src="static/js/cyPlayer.js"></script>
+<script src="static/js/heart.js" async="true"></script>
 <script>
 let myplayer = new cyPlayer(document.getElementById('myPlayer'))
 </script>
