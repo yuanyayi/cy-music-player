@@ -220,7 +220,7 @@ body:before {
   display: block;
 }
 
-.cyPlayer .controllerPanel .volumeBox .volume {
+.cyPlayer .controllerPanel .volumeBox .progress {
   position: relative;
   display: block;
   height: 5px;
@@ -232,7 +232,7 @@ body:before {
   overflow: hidden;
 }
 
-.cyPlayer .controllerPanel .volumeBox .bar {
+.cyPlayer .controllerPanel .volumeBox .progress .bar {
   position: absolute;
   top: 0;
   left: 0;

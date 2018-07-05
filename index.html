@@ -31,7 +31,7 @@
       <!-- 进度条 -->
       <div class="progressBox">
         <span class="time current">-:-</span>
-        <span class="songPro progress">
+        <span class="progress">
           <span class="bar"></span>
         </span>
         <span class="time duration">-:-</span>
@@ -46,9 +46,9 @@
         <div class="volumeBox">
           <i class="fa fa-volume-up sound"></i>
           <i class="fa fa-volume-off mute"></i>
-          <span class="volume">
-                <span class="bar"></span>
-          </span>
+          <!-- <span class="volume"> -->
+                <!-- <span class="bar"></span> -->
+          <!-- </span> -->
         </div>
       </div>
     </div>
@@ -62,7 +62,7 @@
 <script src="static/js/jquery-3.3.1.min.js"></script>
 <script src="static/js/cyPlayer.js"></script>
 <script>
-let myplayer = new cyPlayer(document.getElementById('myPlayer'))
+let app = new cyPlayer(document.getElementById('myPlayer'))
 </script>
 <script src="static/js/heart.js" async="true"></script>
 <script src="static/js/particles.min.js"></script>
