@@ -275,3 +275,7 @@ body:before {
 .cyPlayer .playList li .singerName {
   font-family: PingFangSC-Thin;
 }
+
+.cyPlayer .playList li .frame {
+  display: none;
+}

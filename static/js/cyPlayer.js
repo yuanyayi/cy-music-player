@@ -243,34 +243,18 @@ function cyPlayer(domEl) {
     }
   })
   // ------------------- init ------------------- // 
-  addSongsToList(playList, 'slider')
+  addSongsToList(playList)
   _changeSong(0)
   // ------------------- library ------------------- //
   // 生成播放列表
-  function addSongsToList(playList, type) {
+  function addSongsToList(playList) {
     var listStr = ''
     for (var i in songsList) {
       let song = songsList[i]
       listStr += `
     <li class="item">
-      <div class="frame">
-        <img src="./asset/images/${song.img}">
-      </div>
-      <p>${song.songName.toUpperCase()}</p>
+      <p>${song.songName.toUpperCase()} -- ${song.singerName}</p>
     </li>`
-    }
-    // 幻灯多几张
-    if (type === 'slider') {
-      for (var i = 0; i < 4; i++) {
-        let song = songsList[i]
-        listStr += `
-    <li class="item">
-      <div class="frame">
-        <img src="./asset/images/${song.img}">
-      </div>
-      <p>${song.songName.toUpperCase()}</p>
-    </li>`
-      }
     }
     playList.append(listStr)
   }
