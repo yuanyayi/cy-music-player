@@ -227,8 +227,8 @@ function cyPlayer(domEl) {
     }
     // up
     if (e.keyCode === 38) {
-      let vol = volume() + VOLUMEDIFF <= 1 ? volume() + VOLUMEDIFF : 1
-      volume(vol)
+      let vol = this.volume() + VOLUMEDIFF <= 1 ? this.volume() + VOLUMEDIFF : 1
+      this.volume(vol)
       volumeProgress.setValue(vol, false)
     }
     // right
@@ -237,8 +237,8 @@ function cyPlayer(domEl) {
     }
     // down
     if (e.keyCode === 40) {
-      let vol = volume() - VOLUMEDIFF >= 0 ? volume() - VOLUMEDIFF : 0
-      volume(vol)
+      let vol = this.volume() - VOLUMEDIFF >= 0 ? this.volume() - VOLUMEDIFF : 0
+      this.volume(vol)
       volumeProgress.setValue(vol, false)
     }
   })
